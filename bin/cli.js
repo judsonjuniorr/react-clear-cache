@@ -4,7 +4,7 @@ const fs = require('fs');
 const mkdirp = require('mkdirp');
 const getDirName = require('path').dirname;
 const parseArgs = require('minimist');
-const uuidv4 = require('uuid/v4');
+const { v4: uuidv4 } = require('uuid');
 
 const appVersion = uuidv4();
 
@@ -16,7 +16,7 @@ const jsonContent = JSON.stringify(jsonData);
 
 const args = parseArgs(process.argv.slice(2));
 
-const destination = args.destination || './build/meta.json';
+const destination = `${args.destination || './build'}/meta.json`;
 
 const filename = destination.match(/[^\\/]+$/)[0];
 
@@ -30,8 +30,11 @@ writeFile(destination, jsonContent, (err) => {
 });
 
 function writeFile(path, contents, cb) {
-  mkdirp(getDirName(path), (err) => {
-    if (err) return cb(err);
-    fs.writeFile(path, contents, cb);
-  });
+  mkdirp(getDirName(path))
+    .then(() => {
+      fs.writeFile(path, contents, cb);
+    })
+    .catch((err) => {
+      throw err;
+    });
 }

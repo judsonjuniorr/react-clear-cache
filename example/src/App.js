@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useClearCacheCtx } from 'react-clear-cache';
+import { useClearCacheCtx } from '@herowcode/react-clear-cache';
 
 import logo from './logo.svg';
 import './App.css';
@@ -19,7 +19,7 @@ const App = () => {
           <p>
             <a
               href="#clear"
-              onClick={e => {
+              onClick={(e) => {
                 e.preventDefault();
                 emptyCacheStorage();
               }}

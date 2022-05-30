@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { ClearCacheProvider } from 'react-clear-cache';
+import { ClearCacheProvider } from '@herowcode/react-clear-cache';
 
 import './index.css';
 import App from './App';
