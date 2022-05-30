@@ -2,7 +2,7 @@
 
 > A component to manage application updates.
 
-[![NPM](https://img.shields.io/npm/v/react-clear-cache.svg)](https://www.npmjs.com/package/react-clear-cache) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/@herowcode/react-clear-cache.svg)](ttps://www.npmjs.com/package/@herowcode/react-clear-cache) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Demo
 
@@ -15,39 +15,53 @@ See [demo](https://noahjohn9259.github.io/react-clear-cache/)
 
 ## Install
 
+NPM
+
 ```bash
-$ npm install --save react-clear-cache
+$ npm install --save @herowcode/react-clear-cache
+```
+
+Yarn
+
+```bash
+$ yarn add @herowcode/react-clear-cache
 ```
 
 ## Add script in package.json
 
 This will generate `meta.json` file. This will have the version key with the latest build.
 
-```bash
+```json
 {
   "prebuild": "npm run generate-build-meta",
-  "generate-build-meta": "./node_modules/react-clear-cache/bin/cli.js"
+  "generate-build-meta": "./node_modules/@herowcode/react-clear-cache/bin/cli.js"
 }
 ```
+
+You can pass the `destination` param to the generate-build-meta to choose the output folder
 
 ## Usage
 
 ### Using `Context API`:
 
 ```tsx
-import * as React from 'react';
+import React from 'react';
 
-import { ClearCacheProvider, useClearCacheCtx } from 'react-clear-cache';
+import {
+  ClearCacheProvider,
+  useClearCacheCtx,
+} from '@herowcode/react-clear-cache';
 
-const App: React.FC<{}> = () => {
+function App() {
   const { isLatestVersion, emptyCacheStorage } = useClearCacheCtx();
+
   return (
     <div>
       {!isLatestVersion && (
         <p>
           <a
             href="#"
-            onClick={e => {
+            onClick={(e) => {
               e.preventDefault();
               emptyCacheStorage();
             }}
@@ -58,7 +72,7 @@ const App: React.FC<{}> = () => {
       )}
     </div>
   );
-};
+}
 
 ReactDOM.render(
   <ClearCacheProvider duration={5000}>
@@ -71,11 +85,11 @@ ReactDOM.render(
 ### Using `render props`:
 
 ```tsx
-import * as React from 'react';
+import React from 'react';
 
-import ClearCache from 'react-clear-cache';
+import ClearCache from '@herowcode/react-clear-cache';
 
-const App: React.FC<{}> = () => {
+function App() {
   return (
     <div>
       <ClearCache>
@@ -85,7 +99,7 @@ const App: React.FC<{}> = () => {
               <p>
                 <a
                   href="#"
-                  onClick={e => {
+                  onClick={(e) => {
                     e.preventDefault();
                     emptyCacheStorage();
                   }}
@@ -99,7 +113,7 @@ const App: React.FC<{}> = () => {
       </ClearCache>
     </div>
   );
-};
+}
 
 export default App;
 ```
@@ -107,19 +121,20 @@ export default App;
 ### Using `hooks`:
 
 ```tsx
-import * as React from 'react';
+import React from 'react';
 
-import { useClearCache } from 'react-clear-cache';
+import { useClearCache } from '@herowcode/react-clear-cache';
 
-const App: React.FC<{}> = () => {
+function App() {
   const { isLatestVersion, emptyCacheStorage } = useClearCache();
+
   return (
     <div>
       {!isLatestVersion && (
         <p>
           <a
             href="#"
-            onClick={e => {
+            onClick={(e) => {
               e.preventDefault();
               emptyCacheStorage();
             }}
@@ -130,7 +145,7 @@ const App: React.FC<{}> = () => {
       )}
     </div>
   );
-};
+}
 
 export default App;
 ```
@@ -139,7 +154,7 @@ export default App;
 
 ### `duration`: number
 
-You can set the duration when to fetch for new updates.
+You can set the duration (in ms) when to fetch for new updates.
 
 ### `auto`: boolean
 
@@ -161,7 +176,8 @@ This function empty the CacheStorage and reloads the page.
 
 ## Contributors
 
-1. [noahjohn9259](https://github.com/noahjohn9259)
+1. Created by: [noahjohn9259](https://github.com/noahjohn9259)
+2. Adapted by: [judsonjuniorr](https://github.com/judsonjuniorr)
 
 ## License
 
