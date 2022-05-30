@@ -6,7 +6,7 @@ node_modules
 
 # builds
 build
-/example/public/meta.json
+/example/build/meta.json
 dist
 .rpt2_cache
 

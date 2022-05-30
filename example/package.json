@@ -17,7 +17,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "prebuild": "npm run generate-build-meta",
-    "generate-build-meta": "../bin/cli.js --destination=./public/build.json"
+    "generate-build-meta": "../bin/cli.js --destination=./build/build.json"
   },
   "browserslist": {
     "production": [

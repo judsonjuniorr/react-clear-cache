@@ -8,7 +8,7 @@ const defaultProps = {
   auto: false,
   storageKey: STORAGE_KEY,
   basePath: '',
-  filename: 'meta.json',
+  filename: 'meta.json'
 };
 
 type OwnProps = {
@@ -21,10 +21,10 @@ type OwnProps = {
 };
 
 type Result = {
-  loading: boolean,
+  loading: boolean;
   isLatestVersion: boolean;
-  emptyCacheStorage: (version?:string | undefined) => Promise<void>
-}
+  emptyCacheStorage: (version?: string | undefined) => Promise<void>;
+};
 
 const ClearCacheContext = React.createContext<Result>({} as Result);
 
@@ -51,7 +51,9 @@ export const useClearCache = (props?: OwnProps) => {
   const useAppVersionState = createPersistedState(storageKey);
   const [appVersion, setAppVersion] = useAppVersionState('');
   const [isLatestVersion, setIsLatestVersion] = React.useState(true);
-  const [latestVersion, setLatestVersion] = React.useState(appVersion);
+  const [latestVersion, setLatestVersion] = React.useState<string>(
+    `${appVersion}`
+  );
 
   async function setVersion(version: string) {
     await setAppVersion(version);
@@ -61,9 +63,11 @@ export const useClearCache = (props?: OwnProps) => {
     if ('caches' in window) {
       // Service worker cache should be cleared with caches.delete()
       const cacheKeys = await window.caches.keys();
-      await Promise.all(cacheKeys.map(key => {
-        window.caches.delete(key)
-      }));
+      await Promise.all(
+        cacheKeys.map(key => {
+          window.caches.delete(key);
+        })
+      );
     }
 
     // clear browser cache and reload page
